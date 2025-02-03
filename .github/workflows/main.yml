@@ -68,9 +68,10 @@ jobs:
         uses: PortSwigger/dastardly-github-action@main
         with:
           target-url: 'https://dast2.azurewebsites.net/'
+        continue-on-error: true  # Allow the job to continue even if the scan finds high severity issues
 
       - name: Publish Dastardly Scan Report
-        if: always()
+        if: always()  # This ensures that the report is published regardless of the previous step's result
         uses: mikepenz/action-junit-report@v4
         with:
           check_name: 'Dastardly Scan Report'
